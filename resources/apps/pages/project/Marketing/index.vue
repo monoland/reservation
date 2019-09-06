@@ -43,6 +43,14 @@
                     v-model="record.phone"
                 ></v-text-field>
             </v-flex>
+
+            <v-flex xs12>
+                <v-text-field
+                    label="Keterangan"
+                    :color="$root.theme"
+                    v-model="record.describe"
+                ></v-text-field>
+            </v-flex>
         </v-page-form>
     </v-page-wrap>
 </template>
@@ -81,6 +89,7 @@ export default {
             name: null,
             email: null,
             phone: null,
+            describe: null
         });
     }
 };

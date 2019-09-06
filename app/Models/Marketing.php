@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\MarketingResource;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Marketing extends Model
@@ -120,14 +122,28 @@ class Marketing extends Model
     /**
      * Store
      */
-    public static function storeRecord($request)
+    public static function storeRecord($request, $parent)
     {
         DB::beginTransaction();
 
         try {
             $model = new static;
-            // ...
-            $model->save();
+            $model->name = $request->name;
+            $model->slug = str_slug($request->name);
+            $model->phone = $request->phone;
+            $model->email = $request->email;
+            $model->describe = $request->describe;
+            
+            $parent->marketings()->save($model);
+
+            $user = new User([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->phone),
+                'authent_id' => 3
+            ]);
+
+            $model->user()->save($user);
 
             DB::commit();
 
@@ -147,8 +163,22 @@ class Marketing extends Model
         DB::beginTransaction();
 
         try {
-            // ...
+            $updateName = $request->name <> $model->name;
+            $updateMail = $request->email <> $model->email;
+
+            $model->name = $request->name;
+            $model->slug = str_slug($request->name);
+            $model->phone = $request->phone;
+            $model->email = $request->email;
+            $model->describe = $request->describe;
             $model->save();
+
+            if ($updateName || $updateMail) {
+                $model->user()->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ]);
+            }
 
             DB::commit();
 

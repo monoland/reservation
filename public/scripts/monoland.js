@@ -3974,6 +3974,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'page-marketing',
@@ -4016,7 +4024,8 @@ __webpack_require__.r(__webpack_exports__);
       id: null,
       name: null,
       email: null,
-      phone: null
+      phone: null,
+      describe: null
     });
   }
 });
@@ -30478,6 +30487,24 @@ var render = function() {
                     _vm.$set(_vm.record, "phone", $$v)
                   },
                   expression: "record.phone"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c("v-text-field", {
+                attrs: { label: "Keterangan", color: _vm.$root.theme },
+                model: {
+                  value: _vm.record.describe,
+                  callback: function($$v) {
+                    _vm.$set(_vm.record, "describe", $$v)
+                  },
+                  expression: "record.describe"
                 }
               })
             ],
