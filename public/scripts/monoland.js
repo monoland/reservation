@@ -38605,7 +38605,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bugsnagKey", function() { return bugsnagKey; });
 var siteKey = 1;
 var secretKey = 'DtdBVfIjYiZA2Z6QES41svMYuvrdtLLmtvTs9SBE';
-var baseURL = 'https://reservasi.citraalam.id/';
+var baseURL = 'https://reservasi.citraalam.id/'; // export const secretKey = '3DoGGKakTI78BH23Iux8ap245DiSrdZrcILW3p9J';
+// export const baseURL = 'https://reservation.loc/';
+
 var bugsnagKey = null;
 
 /***/ }),
