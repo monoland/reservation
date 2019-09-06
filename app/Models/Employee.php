@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\EmployeeResource;
 use Illuminate\Database\Eloquent\Model;
+
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
 {
     // use HasMetaField, SoftDeletes;
-    
+
     /**
      * Indicates if the IDs are auto-incrementing.
      *
@@ -55,7 +56,6 @@ class Employee extends Model
      */
     protected $fillable = [];
 
-
     /**
      * Undocumented function
      *
@@ -92,7 +92,8 @@ class Employee extends Model
     public function scopeFetchCombo($query)
     {
         return $query->select(
-            'name AS text', 'id AS value'
+            'name AS text',
+            'id AS value'
         )->get();
     }
 
@@ -127,7 +128,7 @@ class Employee extends Model
     /**
      * Store
      */
-    public static function storeRecord($request, $parent)
+    public static function storeRecord($request, $parent = null)
     {
         DB::beginTransaction();
         $authent = Authent::whereRaw("name = '{$request->role}'")->first();
