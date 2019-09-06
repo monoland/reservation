@@ -4158,15 +4158,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'page-monetize',
@@ -6926,7 +6917,7 @@ var _this = undefined;
   watch: {
     value: {
       handler: function handler(newValue) {
-        var formatted = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["format"])(newValue, this.$props);
+        var formatted = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["format"])(parseFloat(newValue), this.$props);
 
         if (formatted !== this.formattedValue) {
           this.formattedValue = formatted;
@@ -30636,8 +30627,7 @@ var render = function() {
                 attrs: {
                   label: "Ops. Unit",
                   color: _vm.$root.theme,
-                  precision: 1,
-                  suffix: "%"
+                  precision: 1
                 },
                 model: {
                   value: _vm.record.operational,
@@ -30659,8 +30649,7 @@ var render = function() {
                 attrs: {
                   label: "Fasilitas",
                   color: _vm.$root.theme,
-                  precision: 1,
-                  suffix: "%"
+                  precision: 1
                 },
                 model: {
                   value: _vm.record.facility,
@@ -30682,8 +30671,7 @@ var render = function() {
                 attrs: {
                   label: "Ops. Marketing",
                   color: _vm.$root.theme,
-                  precision: 1,
-                  suffix: "%"
+                  precision: 1
                 },
                 model: {
                   value: _vm.record.salary,
@@ -30705,8 +30693,7 @@ var render = function() {
                 attrs: {
                   label: "Margin",
                   color: _vm.$root.theme,
-                  precision: 1,
-                  suffix: "%"
+                  precision: 1
                 },
                 model: {
                   value: _vm.record.margin,
@@ -30728,8 +30715,7 @@ var render = function() {
                 attrs: {
                   label: "Diskon",
                   color: _vm.$root.theme,
-                  precision: 1,
-                  suffix: "%"
+                  precision: 1
                 },
                 model: {
                   value: _vm.record.discount,
@@ -30752,7 +30738,6 @@ var render = function() {
                   label: "Komisi",
                   color: _vm.$root.theme,
                   precision: 1,
-                  suffix: "%",
                   disabled: ""
                 },
                 model: {
@@ -30775,8 +30760,7 @@ var render = function() {
                 attrs: {
                   label: "Manager Fee",
                   color: _vm.$root.theme,
-                  precision: 1,
-                  suffix: "%"
+                  precision: 1
                 },
                 model: {
                   value: _vm.record.managerfee,
@@ -30798,8 +30782,7 @@ var render = function() {
                 attrs: {
                   label: "Market Fee",
                   color: _vm.$root.theme,
-                  precision: 1,
-                  suffix: "%"
+                  precision: 1
                 },
                 model: {
                   value: _vm.record.marketfee,
@@ -30821,8 +30804,7 @@ var render = function() {
                 attrs: {
                   label: "Unit Fee",
                   color: _vm.$root.theme,
-                  precision: 1,
-                  suffix: "%"
+                  precision: 1
                 },
                 model: {
                   value: _vm.record.venuefee,

@@ -132,7 +132,7 @@ export default {
     watch: {
         value: {
             handler: function(newValue) {
-                let formatted = format(newValue, this.$props)
+                let formatted = format(parseFloat(newValue), this.$props)
 
                 if (formatted !== this.formattedValue) {
                    this.formattedValue = formatted

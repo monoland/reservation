@@ -43,7 +43,6 @@
                     label="Ops. Unit"
                     :color="$root.theme"
                     :precision=1
-                    suffix="%"
                     v-model="record.operational"
                 ></v-number-field>
             </v-flex>
@@ -53,7 +52,6 @@
                     label="Fasilitas"
                     :color="$root.theme"
                     :precision=1
-                    suffix="%"
                     v-model="record.facility"
                 ></v-number-field>
             </v-flex>
@@ -63,7 +61,6 @@
                     label="Ops. Marketing"
                     :color="$root.theme"
                     :precision=1
-                    suffix="%"
                     v-model="record.salary"
                 ></v-number-field>
             </v-flex>
@@ -73,7 +70,6 @@
                     label="Margin"
                     :color="$root.theme"
                     :precision=1
-                    suffix="%"
                     v-model="record.margin"
                 ></v-number-field>
             </v-flex>
@@ -83,7 +79,6 @@
                     label="Diskon"
                     :color="$root.theme"
                     :precision=1
-                    suffix="%"
                     v-model="record.discount"
                 ></v-number-field>
             </v-flex>
@@ -93,7 +88,6 @@
                     label="Komisi"
                     :color="$root.theme"
                     :precision=1
-                    suffix="%"
                     v-model="record.commission"
                     disabled
                 ></v-number-field>
@@ -104,7 +98,6 @@
                     label="Manager Fee"
                     :color="$root.theme"
                     :precision=1
-                    suffix="%"
                     v-model="record.managerfee"
                 ></v-number-field>
             </v-flex>
@@ -114,7 +107,6 @@
                     label="Market Fee"
                     :color="$root.theme"
                     :precision=1
-                    suffix="%"
                     v-model="record.marketfee"
                 ></v-number-field>
             </v-flex>
@@ -124,7 +116,6 @@
                     label="Unit Fee"
                     :color="$root.theme"
                     :precision=1
-                    suffix="%"
                     v-model="record.venuefee"
                 ></v-number-field>
             </v-flex>
