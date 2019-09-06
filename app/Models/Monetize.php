@@ -6,12 +6,13 @@ namespace App\Models;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\MonetizeResource;
 use Illuminate\Database\Eloquent\Model;
+
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Monetize extends Model
 {
     // use HasMetaField, SoftDeletes;
-    
+
     /**
      * Indicates if the IDs are auto-incrementing.
      *
@@ -54,7 +55,6 @@ class Monetize extends Model
      */
     protected $fillable = [];
 
-
     /**
      * Undocumented function
      *
@@ -71,7 +71,8 @@ class Monetize extends Model
     public function scopeFetchCombo($query)
     {
         return $query->select(
-            'name AS text', 'id AS value'
+            'name AS text',
+            'id AS value'
         )->get();
     }
 
@@ -160,7 +161,14 @@ class Monetize extends Model
         DB::beginTransaction();
 
         try {
-            // ...
+            $model->facility = $request->facility;
+            $model->salary = $request->salary;
+            $model->margin = $request->margin;
+            $model->discount = $request->discount;
+            $model->commission = $request->commission;
+            $model->marketfee = $request->marketfee;
+            $model->managerfee = $request->managerfee;
+            $model->venuefee = $request->venuefee;
             $model->save();
 
             DB::commit();
