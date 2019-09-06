@@ -8,6 +8,7 @@
         :append-icon="appendIcon"
         :disabled="disabled"
         :hide-details="hideDetails"
+        :readonly="readonly"
 
         @click:append="$emit('click:append')"
     >
@@ -103,7 +104,12 @@ export default {
         suffix: {
             type: String,
             default: () => defaults.suffix
-        }
+        },
+
+        readonly: {
+            type: Boolean,
+            default: false
+        },
     },
 
     directives: {money},

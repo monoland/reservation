@@ -40,7 +40,7 @@
 
             <v-flex md4>
                 <v-number-field
-                    label="Operasional"
+                    label="Ops. Unit"
                     :color="$root.theme"
                     :precision=1
                     suffix="%"
@@ -60,7 +60,7 @@
 
             <v-flex md4>
                 <v-number-field
-                    label="Marketing"
+                    label="Ops. Marketing"
                     :color="$root.theme"
                     :precision=1
                     suffix="%"
@@ -95,6 +95,7 @@
                     :precision=1
                     suffix="%"
                     v-model="record.commission"
+                    disabled
                 ></v-number-field>
             </v-flex>
 
@@ -146,6 +147,10 @@ export default {
             }
 
             return [];
+        },
+
+        commission: function() {
+            return parseFloat(parseFloat(this.record.marketfee) + parseFloat(this.record.managerfee) + parseFloat(this.record.venuefee)).toFixed(1)
         }
     },
 
@@ -190,6 +195,12 @@ export default {
             segment: null,
             type: null
         });
+    },
+
+    watch: {
+        commission: function(newVal) {
+            this.record.commission = newVal;
+        }
     }
 };
 </script>

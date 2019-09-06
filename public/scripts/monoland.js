@@ -4166,6 +4166,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'page-monetize',
@@ -4177,6 +4178,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return [];
+    },
+    commission: function commission() {
+      return parseFloat(parseFloat(this.record.marketfee) + parseFloat(this.record.managerfee) + parseFloat(this.record.venuefee)).toFixed(1);
     }
   },
   data: function data() {
@@ -4253,6 +4257,11 @@ __webpack_require__.r(__webpack_exports__);
       segment: null,
       type: null
     });
+  },
+  watch: {
+    commission: function commission(newVal) {
+      this.record.commission = newVal;
+    }
   }
 });
 
@@ -6816,6 +6825,7 @@ var _this = undefined;
 //
 //
 //
+//
 
 
 
@@ -6890,6 +6900,10 @@ var _this = undefined;
       "default": function _default() {
         return _options__WEBPACK_IMPORTED_MODULE_1__["default"].suffix;
       }
+    },
+    readonly: {
+      type: Boolean,
+      "default": false
     }
   },
   directives: {
@@ -30620,7 +30634,7 @@ var render = function() {
             [
               _c("v-number-field", {
                 attrs: {
-                  label: "Operasional",
+                  label: "Ops. Unit",
                   color: _vm.$root.theme,
                   precision: 1,
                   suffix: "%"
@@ -30666,7 +30680,7 @@ var render = function() {
             [
               _c("v-number-field", {
                 attrs: {
-                  label: "Marketing",
+                  label: "Ops. Marketing",
                   color: _vm.$root.theme,
                   precision: 1,
                   suffix: "%"
@@ -30738,7 +30752,8 @@ var render = function() {
                   label: "Komisi",
                   color: _vm.$root.theme,
                   precision: 1,
-                  suffix: "%"
+                  suffix: "%",
+                  disabled: ""
                 },
                 model: {
                   value: _vm.record.commission,
@@ -33459,7 +33474,8 @@ var render = function() {
         "persistent-hint": _vm.persistentHint,
         "append-icon": _vm.appendIcon,
         disabled: _vm.disabled,
-        "hide-details": _vm.hideDetails
+        "hide-details": _vm.hideDetails,
+        readonly: _vm.readonly
       },
       on: {
         "click:append": function($event) {
