@@ -165,7 +165,7 @@ export default {
         this.tableHeaders([
             { text: 'Segmen', value: 'segment.text', sortable: false },
             { text: 'Type', value: 'type', sortable: false },
-            { text: 'Operasional', value: 'operational', align: 'end', class: 'percent-field' },
+            { text: 'Ops. Unit', value: 'operational', align: 'end', class: 'percent-field' },
             { text: 'Fasilitas', value: 'facility', align: 'end', class: 'percent-field' },
             { text: 'Salari', value: 'salary', align: 'end', class: 'percent-field' },
             { text: 'Margin', value: 'margin', align: 'end', class: 'percent-field' },

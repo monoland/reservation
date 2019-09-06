@@ -4204,7 +4204,7 @@ __webpack_require__.r(__webpack_exports__);
       value: 'type',
       sortable: false
     }, {
-      text: 'Operasional',
+      text: 'Ops. Unit',
       value: 'operational',
       align: 'end',
       "class": 'percent-field'

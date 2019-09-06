@@ -161,6 +161,7 @@ class Monetize extends Model
         DB::beginTransaction();
 
         try {
+            $model->operational = $request->operational;
             $model->facility = $request->facility;
             $model->salary = $request->salary;
             $model->margin = $request->margin;
