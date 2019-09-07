@@ -45,7 +45,7 @@ class MonetizePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->isManager();
     }
 
     /**
@@ -56,7 +56,7 @@ class MonetizePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isManager();
     }
 
     /**
@@ -68,7 +68,7 @@ class MonetizePolicy
      */
     public function update(User $user, Monetize $monetize)
     {
-        //
+        return $user->isManager();
     }
 
     /**
@@ -80,7 +80,7 @@ class MonetizePolicy
      */
     public function delete(User $user, Monetize $monetize)
     {
-        //
+        return $user->isManager();
     }
 
     /**
