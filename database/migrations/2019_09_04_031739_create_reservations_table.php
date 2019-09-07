@@ -29,7 +29,9 @@ class CreateReservationsTable extends Migration
             $table->double('marktfee', 8, 2)->unsigned()->default(0);
             $table->double('mangrfee', 8, 2)->unsigned()->default(0);
             $table->double('venuefee', 8, 2)->unsigned()->default(0);
-            $table->enum('status', ['prospect', 'dropped', 'reserved', 'canceled', 'ongoing', 'completed'])->index()->default('prospect');
+            $table->enum('status', [
+                'prospect', 'prospect-dropped', 'visit', 'visit-dropped', 'reserved', 'canceled', 'ongoing', 'completed'
+            ])->index()->default('prospect');
             $table->text('feedback')->nullable();
             $table->text('reason')->nullable();
             $table->boolean('checked')->default(false);

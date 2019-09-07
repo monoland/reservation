@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Marketing;
+use App\Models\Label;
 use App\Models\Province;
 use App\Models\Segment;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -31,7 +31,8 @@ class CustomerCollection extends ResourceCollection
         return [
             'additional' => [
                 'provinces' => Province::fetchCombo(),
-                'segments' => Segment::fetchCombo()
+                'segments' => Segment::fetchCombo(),
+                'labels' => Label::fetchCombo()
             ]
         ];
     }

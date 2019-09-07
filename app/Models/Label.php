@@ -4,11 +4,11 @@ namespace App\Models;
 
 // use App\Traits\HasMetaField;
 use Illuminate\Support\Facades\DB;
-use App\Http\Resources\DistrictResource;
+use App\Http\Resources\LabelResource;
 use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
-class District extends Model
+class Label extends Model
 {
     // use HasMetaField, SoftDeletes;
     
@@ -52,37 +52,10 @@ class District extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'slug'];
 
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function customers()
-    {
-        return $this->hasMany(Customer::class);
-    }
 
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function regency()
-    {
-        return $this->belongsTo(Regency::class);
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function province()
-    {
-        return $this->belongsTo(Province::class);
-    }
+    // relations
 
     /**
      * Scope for combo
@@ -130,7 +103,7 @@ class District extends Model
 
             DB::commit();
 
-            return new DistrictResource($model);
+            return new LabelResource($model);
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -151,7 +124,7 @@ class District extends Model
 
             DB::commit();
 
-            return new DistrictResource($model);
+            return new LabelResource($model);
         } catch (\Exception $e) {
             DB::rollBack();
 

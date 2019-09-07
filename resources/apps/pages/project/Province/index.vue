@@ -1,17 +1,8 @@
 <template>
     <v-page-wrap crud absolute searchable with-progress>
         <template #toolbar-default>
-            <v-scale-transition>
-                <v-btn icon key="link" :color="$root.theme" @click="openCustomers" v-show="!disabled.link">
-                    <v-icon>spa</v-icon>
-                </v-btn>
-            </v-scale-transition>
-            
-            <v-scale-transition>
-                <v-btn icon key="link" :color="$root.theme" @click="openLink" v-show="!disabled.link">
-                    <v-icon>photo_filter</v-icon>
-                </v-btn>
-            </v-scale-transition>
+            <v-btn-tips @click="openCustomers" label="pelanggan" icon="spa" :show="!disabled.link" />
+            <v-btn-tips @click="openLink" label="kota-kabupaten" icon="photo_filter" :show="!disabled.link" />
         </template>
 
         <v-desktop-table v-if="desktop"
@@ -62,7 +53,8 @@ export default {
     created() {
         this.tableHeaders([
             { text: 'Nama Propinsi', value: 'name' },
-            { text: 'Pelanggan', value: 'customers', align: 'center', sortable: false, class: 'number-field' },
+            { text: 'Kota/Kab', value: 'regencies_count', align: 'center', sortable: false, class: 'number-field' },
+            { text: 'Pelanggan', value: 'customers_count', align: 'center', sortable: false, class: 'number-field' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
         ]);
 

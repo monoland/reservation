@@ -1,11 +1,7 @@
 <template>
     <v-page-wrap crud absolute searchable with-progress>
         <template #toolbar-default>
-            <v-scale-transition>
-                <v-btn icon key="link" :color="$root.theme" @click="openLink" v-show="!disabled.link">
-                    <v-icon>photo_filter</v-icon>
-                </v-btn>
-            </v-scale-transition>
+            <v-btn-tips @click="openLink" label="marketing" icon="photo_filter" :show="!disabled.link" />
         </template>
 
         <v-desktop-table v-if="desktop"
@@ -66,6 +62,7 @@ export default {
             { text: 'Nama', value: 'name' },
             { text: 'Email', value: 'email' },
             { text: 'Telpon', value: 'phone' },
+            { text: 'Pelanggan', value: 'customers_count', align: 'center', sortable: false, class: 'number-field' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
         ]);
 

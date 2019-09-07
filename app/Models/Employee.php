@@ -87,6 +87,16 @@ class Employee extends Model
     }
 
     /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function venue()
+    {
+        return $this->belongsTo(Venue::class);
+    }
+
+    /**
      * Scope for combo
      */
     public function scopeFetchCombo($query)

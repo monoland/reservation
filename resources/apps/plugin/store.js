@@ -36,6 +36,7 @@ export default new Vuex.Store({
         overideState:() => {},
         setRecord:() => {},
 
+        allow: { addnew: true, edit: true, delete: true },
         additional: [],
         dataUrl: null,
         disabled: { add: false, delete: true, edit: true, find: false, link: true, refresh: false },
@@ -97,6 +98,12 @@ export default new Vuex.Store({
 
         afterSelected: function(state, payload) {
             state.afterSelected = payload;
+        },
+
+        allow: function(state, payload) {
+            Object.keys(payload).forEach(key => {
+                state.allow[key] = payload[key];
+            });
         },
 
         auth: function(state, payload) {
@@ -190,6 +197,7 @@ export default new Vuex.Store({
             state.overideState = () => {};
             state.setRecord = () => {};
 
+            state.allow = { addnew: true, edit: true, delete: true };
             state.dataUrl = null;
             state.disabled = { add: false, delete: true, edit: true, find: false, link: true, refresh: false };
             state.form = { state: false, mode: 'addnew' };
@@ -372,7 +380,7 @@ export default new Vuex.Store({
         },
 
         editFormOpen: function({ commit, state }, payload) {
-            if (payload.constructor === Object) {
+            if (payload && payload.constructor === Object) {
                 if (state.page.state === 'pinned') {
                     commit('selectedPush', payload);
                     return;
@@ -422,7 +430,12 @@ export default new Vuex.Store({
             commit('form', { state: false, mode: null });
         },
 
-        newFormOpen: function({ commit, state }) {
+        newFormOpen: function({ commit, dispatch, state }) {
+            if (!state.allow.addnew) {
+                dispatch('errors', 'This operation is not allow');
+                return;
+            }
+            
             state.setRecord();
             commit('form', { state: true, mode: 'addnew' });
             

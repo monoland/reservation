@@ -110,6 +110,15 @@ class Segment extends Model
             $model->mode = $request->mode;
             $model->save();
 
+            $labels = explode('/', $request->name);
+
+            foreach ($labels as $label) {
+                Label::firstOrCreate([
+                    'name' => $label,
+                    'slug' => str_slug($label)
+                ]);
+            }
+
             DB::commit();
 
             return new SegmentResource($model);
@@ -132,6 +141,15 @@ class Segment extends Model
             $model->slug = str_slug($request->name);
             $model->mode = $request->mode;
             $model->save();
+
+            $labels = explode('/', $request->name);
+
+            foreach ($labels as $label) {
+                Label::firstOrCreate([
+                    'name' => $label,
+                    'slug' => str_slug($label)
+                ]);
+            }
 
             DB::commit();
 

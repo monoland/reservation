@@ -7,11 +7,7 @@
         </template>
         
         <template #toolbar-default>
-            <v-scale-transition>
-                <v-btn icon key="link" :color="$root.theme" @click="openCustomers" v-show="!disabled.link">
-                    <v-icon>spa</v-icon>
-                </v-btn>
-            </v-scale-transition>
+            <v-btn-tips @click="openCustomers" label="pelanggan" icon="spa" :show="!disabled.link" />
         </template>
 
         <v-desktop-table v-if="desktop"
@@ -62,7 +58,7 @@ export default {
     created() {
         this.tableHeaders([
             { text: 'Nama Kecamatan', value: 'name' },
-            { text: 'Pelanggan', value: 'customers', align: 'center', sortable: false, class: 'number-field' },
+            { text: 'Pelanggan', value: 'customers_count', align: 'center', sortable: false, class: 'number-field' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
         ]);
 

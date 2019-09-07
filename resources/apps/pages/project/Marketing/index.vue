@@ -73,7 +73,7 @@ export default {
             { text: 'Email', value: 'email' },
             { text: 'Telpon', value: 'phone' },
             { text: 'Keterangan', value: 'describe', class: 'long-field' },
-            { text: 'Pelanggan', value: 'customers', align: 'center', sortable: false, class: 'number-field' },
+            { text: 'Pelanggan', value: 'customers_count', align: 'center', sortable: false, class: 'number-field' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
         ]);
 

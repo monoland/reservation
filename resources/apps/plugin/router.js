@@ -40,6 +40,7 @@ const router = new VueRouter({
             { path: 'manager', name: 'manager', component: project.Manager },
             { path: 'manager/:manager/marketing', name: 'marketing', component: project.Marketing },
             { path: 'pelanggan', name: 'customer', component: project.Customer },
+            { path: 'reservasi', name: 'reservation', component: project.Reservation },
         ]},
 
         // fallback

@@ -19,7 +19,19 @@ class VenueController extends Controller
         $this->authorize('viewAny', Venue::class);
         
         return new VenueCollection(
-            Venue::filterOn($request)->paginate($request->itemsPerPage)
+            Venue::withCount([
+                'employees',
+
+                'monetizes',
+
+                'pricelists as pricelists_count' => function ($qry) {
+                    $qry->where('type', 'item');
+                },
+
+                'pricelists as packages_count' => function ($qry) {
+                    $qry->where('type', 'package');
+                },
+            ])->filterOn($request)->paginate($request->itemsPerPage)
         );
     }
 

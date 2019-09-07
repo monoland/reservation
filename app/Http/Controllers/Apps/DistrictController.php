@@ -21,7 +21,7 @@ class DistrictController extends Controller
         $this->authorize('viewAny', District::class);
 
         return new DistrictCollection(
-            $regency->districts()->filterOn($request)->paginate($request->itemsPerPage)
+            $regency->districts()->withCount('customers')->filterOn($request)->paginate($request->itemsPerPage)
         );
     }
 

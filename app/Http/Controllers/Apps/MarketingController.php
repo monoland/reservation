@@ -21,7 +21,7 @@ class MarketingController extends Controller
         $this->authorize('viewAny', Marketing::class);
 
         return new MarketingCollection(
-            $employee->marketings()->filterOn($request)->paginate($request->itemsPerPage)
+            $employee->marketings()->withCount('customers')->filterOn($request)->paginate($request->itemsPerPage)
         );
     }
 

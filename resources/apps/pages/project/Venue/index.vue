@@ -1,35 +1,10 @@
 <template>
     <v-page-wrap crud absolute searchable with-progress>
         <template #toolbar-default>
-            <v-scale-transition>
-                <v-btn icon key="employee" :color="$root.theme" @click="openEmployee" v-show="!disabled.link">
-                    <v-icon>assignment_ind</v-icon>
-                </v-btn>
-            </v-scale-transition>
-
-            <v-scale-transition>
-                <v-btn icon key="monetize" :color="$root.theme" @click="openMonetize" v-show="!disabled.link">
-                    <v-icon>settings</v-icon>
-                </v-btn>
-            </v-scale-transition>
-
-            <v-scale-transition>
-                <v-btn icon key="itemprice" :color="$root.theme" @click="openItemPrice" v-show="!disabled.link">
-                    <v-icon>layers</v-icon>
-                </v-btn>
-            </v-scale-transition>
-
-            <v-scale-transition>
-                <v-btn icon key="package" :color="$root.theme" @click="openPackage" v-show="!disabled.link">
-                    <v-icon>gradient</v-icon>
-                </v-btn>
-            </v-scale-transition>
-            
-            <v-scale-transition>
-                <v-btn icon key="link" :color="$root.theme" @click="openLink" v-show="!disabled.link">
-                    <v-icon>photo_filter</v-icon>
-                </v-btn>
-            </v-scale-transition>
+            <v-btn-tips @click="openEmployee" label="karyawan" icon="assignment_ind" :show="!disabled.link" />
+            <v-btn-tips @click="openMonetize" label="monetize" icon="settings" :show="!disabled.link" />
+            <v-btn-tips @click="openItemPrice" label="harga-item" icon="layers" :show="!disabled.link" />
+            <v-btn-tips @click="openPackage" label="harga-paket" icon="gradient" :show="!disabled.link" />
         </template>
 
         <v-desktop-table v-if="desktop"
@@ -80,9 +55,10 @@ export default {
     created() {
         this.tableHeaders([
             { text: 'Nama Lokasi', value: 'name' },
-            { text: 'Karyawan', value: 'employee_count', sortable: false, align: 'end', class: 'count-field' },
-            { text: 'Item', value: 'item_count', sortable: false, align: 'end', class: 'count-field' },
-            { text: 'Package', value: 'package_count', sortable: false, align: 'end', class: 'count-field' },
+            { text: 'Karyawan', value: 'employees_count', sortable: false, align: 'center', class: 'count-field' },
+            { text: 'Monetize', value: 'monetizes_count', sortable: false, align: 'center', class: 'count-field' },
+            { text: 'Pricelist', value: 'pricelists_count', sortable: false, align: 'center', class: 'count-field' },
+            { text: 'Package', value: 'packages_count', sortable: false, align: 'center', class: 'count-field' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
         ]);
 

@@ -19,7 +19,7 @@ class SegmentController extends Controller
         $this->authorize('viewAny', Segment::class);
         
         return new SegmentCollection(
-            Segment::filterOn($request)->paginate($request->itemsPerPage)
+            Segment::withCount('customers')->filterOn($request)->paginate($request->itemsPerPage)
         );
     }
 

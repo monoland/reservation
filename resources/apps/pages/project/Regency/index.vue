@@ -7,17 +7,8 @@
         </template>
         
         <template #toolbar-default>
-            <v-scale-transition>
-                <v-btn icon key="link" :color="$root.theme" @click="openCustomers" v-show="!disabled.link">
-                    <v-icon>spa</v-icon>
-                </v-btn>
-            </v-scale-transition>
-
-            <v-scale-transition>
-                <v-btn icon key="link" :color="$root.theme" @click="openLink" v-show="!disabled.link">
-                    <v-icon>photo_filter</v-icon>
-                </v-btn>
-            </v-scale-transition>
+            <v-btn-tips @click="openCustomers" label="pelanggan" icon="spa" :show="!disabled.link" />
+            <v-btn-tips @click="openLink" label="kecamatan" icon="photo_filter" :show="!disabled.link" />
         </template>
 
         <v-desktop-table v-if="desktop"
@@ -68,7 +59,8 @@ export default {
     created() {
         this.tableHeaders([
             { text: 'Nama Kota/Kabupaten', value: 'name' },
-            { text: 'Pelanggan', value: 'customers', align: 'center', sortable: false, class: 'number-field' },
+            { text: 'Kecamatan', value: 'districts_count', align: 'center', sortable: false, class: 'number-field' },
+            { text: 'Pelanggan', value: 'customers_count', align: 'center', sortable: false, class: 'number-field' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
         ]);
 

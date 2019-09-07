@@ -17,9 +17,9 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $this->authorize('viewAny', Employee::class);
-        
+
         return new EmployeeCollection(
-            Employee::filterOn($request)->paginate($request->itemsPerPage)
+            Employee::withCount('customers')->filterOn($request)->paginate($request->itemsPerPage)
         );
     }
 

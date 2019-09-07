@@ -23,6 +23,7 @@ class CreateCustomersTable extends Migration
             $table->string('contact_name')->nullable()->index();
             $table->string('contact_phone')->nullable()->index();
             $table->unsignedBigInteger('segment_id')->index();
+            $table->unsignedBigInteger('label_id')->index();
             $table->unsignedBigInteger('marketing_id')->index();
             $table->unsignedBigInteger('district_id')->index();
             $table->unsignedBigInteger('regency_id')->index();

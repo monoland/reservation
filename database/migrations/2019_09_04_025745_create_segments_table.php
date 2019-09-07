@@ -17,7 +17,14 @@ class CreateSegmentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->index();
             $table->string('slug')->unique();
-            $table->enum('mode', ['school', 'general'])->index()->default('school');
+            $table->enum('mode', ['school', 'non-school'])->index()->default('school');
+            $table->timestamps();
+        });
+
+        Schema::create('labels', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->index();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
@@ -30,5 +37,6 @@ class CreateSegmentsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('segments');
+        Schema::dropIfExists('labels');
     }
 }

@@ -1,11 +1,7 @@
 <template>
     <v-page-wrap crud absolute searchable with-progress>
         <template #toolbar-default>
-            <v-scale-transition>
-                <v-btn icon key="link" :color="$root.theme" @click="openCustomers" v-show="!disabled.link">
-                    <v-icon>spa</v-icon>
-                </v-btn>
-            </v-scale-transition>
+            <v-btn-tips @click="openCustomers" label="pelanggan" icon="spa" :show="!disabled.link" />
         </template>
 
         <v-desktop-table v-if="desktop"
@@ -22,7 +18,7 @@
         </v-mobile-table>
 
         <v-page-form small>
-            <v-flex xs12>
+            <v-flex sm8 xs12>
                 <v-text-field
                     label="Nama Lengkap"
                     :color="$root.theme"
@@ -30,7 +26,7 @@
                 ></v-text-field>
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex sm4 xs12>
                 <v-select
                     label="Group Segmen"
                     :items="modes"
@@ -53,15 +49,15 @@ export default {
     data:() => ({
         modes: [
             { text: 'Sekolah', value: 'school' },
-            { text: 'Non-Sekolah', value: 'general' }
+            { text: 'Non-Sekolah', value: 'non-school' }
         ]
     }),
 
     created() {
         this.tableHeaders([
             { text: 'Nama', value: 'name' },
-            { text: 'Group', value: 'mode', class: 'medium-field' },
-            { text: 'Pelanggan', value: 'customers', align: 'center', sortable: false, class: 'number-field' },
+            { text: 'Group', value: 'mode', class: 'common-field' },
+            { text: 'Pelanggan', value: 'customers_count', align: 'center', sortable: false, class: 'number-field' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
         ]);
 

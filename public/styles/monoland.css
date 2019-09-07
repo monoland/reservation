@@ -24520,6 +24520,9 @@ html {
   background: transparent;
   box-shadow: none;
 }
+.layout {
+  max-width: 100%;
+}
 .v-page {
   position: absolute;
   height: 100%;

@@ -21,7 +21,7 @@ class RegencyController extends Controller
         $this->authorize('viewAny', Regency::class);
 
         return new RegencyCollection(
-            $province->regencies()->filterOn($request)->paginate($request->itemsPerPage)
+            $province->regencies()->withCount('customers', 'districts')->filterOn($request)->paginate($request->itemsPerPage)
         );
     }
 

@@ -19,7 +19,7 @@ class ProvinceController extends Controller
         $this->authorize('viewAny', Province::class);
         
         return new ProvinceCollection(
-            Province::filterOn($request)->paginate($request->itemsPerPage)
+            Province::withCount('customers', 'regencies')->filterOn($request)->paginate($request->itemsPerPage)
         );
     }
 

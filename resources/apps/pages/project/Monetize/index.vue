@@ -25,6 +25,7 @@
                     label="Segmen"
                     :items="segments"
                     :color="$root.theme"
+                    :disabled="form.mode === 'edit'"
                     v-model="record.segment"
                 ></v-combobox>
             </v-flex>
@@ -34,6 +35,7 @@
                     label="Type"
                     :items="types"
                     :color="$root.theme"
+                    :disabled="form.mode === 'edit'"
                     v-model="record.type"
                 ></v-select>
             </v-flex>

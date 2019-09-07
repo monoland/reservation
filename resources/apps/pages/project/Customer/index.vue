@@ -99,12 +99,21 @@
                 ></v-text-field>
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex xs8>
                 <v-text-field
                     label="Email"
                     :color="$root.theme"
                     v-model="record.email"
                 ></v-text-field>
+            </v-flex>
+
+            <v-flex xs4>
+                <v-combobox
+                    label="Label"
+                    :items="labels"
+                    :color="$root.theme"
+                    v-model="record.label"
+                ></v-combobox>
             </v-flex>
 
             <v-flex xs12 v-if="auth.authent === 'manager'">
@@ -131,6 +140,14 @@ export default {
     mixins: [pageMixins],
 
     computed: {
+        labels: function() {
+            if (this.additional && this.additional.hasOwnProperty('labels')) {
+                return this.additional.labels;
+            }
+
+            return [];
+        },
+        
         segments: function() {
             if (this.additional && this.additional.hasOwnProperty('segments')) {
                 return this.additional.segments;
@@ -175,6 +192,7 @@ export default {
             name: null,
             address: null,
             segment: null,
+            label: null,
             marketing: null,
             regency: null,
             province: null,
@@ -192,6 +210,10 @@ export default {
                 filterOn: this.$route.query.filterOn
             });
         }
+    },
+
+    mounted() {
+        this.$store.commit('allow', { addnew: this.auth.authent === 'marketing' });
     },
 
     methods: {

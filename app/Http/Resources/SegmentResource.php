@@ -14,6 +14,13 @@ class SegmentResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'mode' => $this->mode,
+            'customers_count' => $this->customers_count,
+            'pinned' => false,
+            'updated_at' => (string) $this->updated_at,
+        ];
     }
 }
