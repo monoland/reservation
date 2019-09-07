@@ -38,6 +38,10 @@ class CustomerResource extends JsonResource
                 'text' => $this->district->name,
                 'value' => $this->district->id,
             ],
+            'label' => [
+                'text' => $this->label->name,
+                'value' => $this->label->id,
+            ],
             'phone' => $this->phone,
             'contact_name' => $this->contact_name,
             'contact_phone' => $this->contact_phone,

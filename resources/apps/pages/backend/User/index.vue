@@ -31,12 +31,12 @@
             </v-flex>
 
             <v-flex xs12>
-                <v-select
+                <v-combobox
                     label="Otentikasi"
                     :items="authents"
                     :color="$root.theme"
-                    v-model="record.authent_id"
-                ></v-select>
+                    v-model="record.authent"
+                ></v-combobox>
             </v-flex>
         </v-page-form>
     </v-page-wrap>
@@ -53,7 +53,11 @@ export default {
     data:() => ({
         single: false,
         authents: [
-            { text: 'Administrator', value: 1 }
+            { text: 'Administrator', value: 1 },
+            { text: 'Manager', value: 2 },
+            { text: 'Marketing', value: 3 },
+            { text: 'Office', value: 4 },
+            { text: 'Trainer', value: 5 }
         ]
     }),
 
@@ -61,7 +65,7 @@ export default {
         this.tableHeaders([
             { text: 'Name', value: 'name' },
             { text: 'Email', value: 'email' },
-            { text: 'Otentikasi', value: 'authent_name' },
+            { text: 'Otentikasi', value: 'authent.text' },
             { text: 'Updated', value: 'updated_at', class: 'date-field' }
         ]);
 
@@ -76,7 +80,7 @@ export default {
             id: null,
             name: null,
             email: null,
-            authent_id: null
+            authent: null
         });
     }
 };

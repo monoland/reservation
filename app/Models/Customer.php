@@ -69,6 +69,16 @@ class Customer extends Model
      *
      * @return void
      */
+    public function label()
+    {
+        return $this->belongsTo(Label::class);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function marketing()
     {
         return $this->belongsTo(Marketing::class);

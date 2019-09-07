@@ -153,7 +153,7 @@ class User extends Authenticatable
             $model = new static;
             $model->name = $request->name;
             $model->email = $request->email;
-            $model->authent_id = $request->authent_id;
+            $model->authent_id = $request->authent['value'];
             $model->password = Hash::make('12345678');
             $model->theme = 'blue-grey';
             $model->avatar = '/images/photo-holder.png';
@@ -194,8 +194,8 @@ class User extends Authenticatable
                 $model->background = $request->background;
             }
 
-            if ($request->has('authorization')) {
-                $model->authorization = $request->authorization;
+            if ($request->has('authent')) {
+                $model->authent_id = $request->authent['value'];
             }
 
             if ($request->has('theme')) {
