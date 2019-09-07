@@ -45,4 +45,5 @@ Route::middleware(['api', 'auth:api'])->group(function () {
     Route::resource('employee', 'Apps\EmployeeController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('employee.marketing', 'Apps\MarketingController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('customer', 'Apps\CustomerController')->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('reservation', 'Apps\ReservationController')->only(['index', 'store', 'update', 'destroy']);
 });

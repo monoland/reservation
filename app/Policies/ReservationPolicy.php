@@ -45,7 +45,7 @@ class ReservationPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->isMarketing();
     }
 
     /**
@@ -56,7 +56,7 @@ class ReservationPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isMarketing();
     }
 
     /**

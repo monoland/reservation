@@ -124,6 +124,7 @@ class Customer extends Model
         $search = $request->has('search') ? strtolower($request->search) : null;
         $filton = $request->has('filterOn') ? $request->filterOn : null;
         $filtby = $request->has('filterBy') ? $request->filterBy : null;
+        $modeon = $request->has('mode') ? $request->mode : null;
 
         $mixquery = $query;
 
@@ -133,6 +134,10 @@ class Customer extends Model
 
         if ($filtby) {
             $mixquery = $mixquery->whereRaw("{$filton}_id = '{$filtby}'");
+        }
+
+        if ($modeon) {
+            $mixquery = $mixquery->whereRaw("{$modeon} = true");
         }
 
         if ($sortby) {
