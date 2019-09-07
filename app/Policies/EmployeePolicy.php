@@ -45,7 +45,7 @@ class EmployeePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->isManager();
     }
 
     /**
@@ -56,7 +56,7 @@ class EmployeePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isManager();
     }
 
     /**
@@ -68,7 +68,7 @@ class EmployeePolicy
      */
     public function update(User $user, Employee $employee)
     {
-        //
+        return $user->isManager();
     }
 
     /**
@@ -80,7 +80,7 @@ class EmployeePolicy
      */
     public function delete(User $user, Employee $employee)
     {
-        //
+        return $user->isManager();
     }
 
     /**
