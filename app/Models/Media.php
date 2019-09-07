@@ -8,7 +8,7 @@ class Media
 {
     protected $chunksFolder = 'chunks';
     protected $uploadFolder = 'uploads';
-    protected $maxiParts = 200;
+    protected $maxiParts = 800;
     protected $inputName = 'fileUpload';
     protected $fileName = 'fileName';
     protected $totalParts = 'totalParts';
