@@ -162,6 +162,7 @@ class Customer extends Model
             $model->province_id = $request->province['value'];
             $model->regency_id = $request->regency['value'];
             $model->district_id = $request->district['value'];
+            $model->label_id = $request->label['value'];
             $model->marketing_id = $request->user()->userable->id;
             $model->save();
 
@@ -194,6 +195,7 @@ class Customer extends Model
             $model->province_id = $request->province['value'];
             $model->regency_id = $request->regency['value'];
             $model->district_id = $request->district['value'];
+            $model->label_id = $request->label['value'];
             
             if ($request->user()->authent->name === 'manager') {
                 $model->checked = $request->checked;
