@@ -5,6 +5,10 @@
                 <v-icon>arrow_back</v-icon>
             </v-btn>
         </template>
+
+        <template #toolbar-default>
+            <v-btn-tips @click="mergeCustomer" label="merge-data" icon="merge_type" :show="!disabled.link" />
+        </template>
         
         <v-desktop-table v-if="desktop"
             single
@@ -217,6 +221,10 @@ export default {
     },
 
     methods: {
+        mergeCustomer: function() {
+            // 
+        },
+
         fetchRegency: async function(province) {
             try {
                 let { data } = await this.http.get(`/api/province/${province.value}/regency/combo`);
