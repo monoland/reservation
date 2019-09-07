@@ -22,6 +22,7 @@ class UserResource extends JsonResource
                 'text' => $this->authent->name,
                 'value' => $this->authent->id,
             ],
+            'authent_name' => $this->authent->name,
             'avatar' => $this->avatar,
             'background' => $this->background,
             'theme' => $this->theme,
