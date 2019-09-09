@@ -145,10 +145,18 @@ class Segment extends Model
             $labels = explode('/', $request->name);
 
             foreach ($labels as $label) {
-                Label::firstOrCreate([
-                    'name' => $label,
-                    'slug' => str_slug($label)
-                ]);
+                $slug = str_slug($label);
+                $rs = Label::whereRaw("slug = '{$slug}'")->first();
+
+                if ($rs) {
+                    $rs->name = $label;
+                    $rs->save();
+                } else {
+                    $rs = new Label();
+                    $rs->name = $label;
+                    $rs->slug = $slug;
+                    $rs->save();
+                }
             }
 
             DB::commit();
