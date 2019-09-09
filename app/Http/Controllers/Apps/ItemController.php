@@ -6,6 +6,7 @@ use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Http\Resources\ItemCollection;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ItemPricelist;
 
 class ItemController extends Controller
 {
@@ -103,5 +104,15 @@ class ItemController extends Controller
     public function combo(Request $request)
     {
         return Item::fetchCombo($request);
+    }
+
+    public function prices(Item $item, Request $request)
+    {
+        return ItemPricelist::collection($item->prices);
+    }
+
+    public function pricelists(Item $item, Request $request)
+    {
+        return ItemPricelist::collection($item->pricelists);
     }
 }

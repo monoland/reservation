@@ -32,6 +32,10 @@ Route::middleware(['api', 'auth:api'])->group(function () {
     Route::get('venue/{venue}/monetize/fetch', 'Apps\MonetizeController@fetch');
     Route::get('venue/{venue}/pricelist/fetch', 'Apps\PricelistController@fetch');
 
+    // other
+    Route::get('item/{item}/prices', 'Apps\ItemController@prices');
+    Route::get('item/{item}/pricelists', 'Apps\ItemController@pricelists');
+
     // application
     Route::resource('item', 'Apps\ItemController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('segment', 'Apps\SegmentController')->only(['index', 'store', 'update', 'destroy']);

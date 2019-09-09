@@ -584,6 +584,8 @@ export default new Vuex.Store({
                 let url = state.dataUrl;
                 let params = state.table.params;
 
+                if (!url) return;
+
                 if (url.includes('/api/document')) {
                     commit('document', { records: [] });
                 }

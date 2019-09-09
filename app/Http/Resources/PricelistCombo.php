@@ -16,7 +16,7 @@ class PricelistCombo extends JsonResource
     {
         return [
             'text' => $this->name,
-            'value' => $this->id,
+            'value' => $this->item_id,
             'price' => $this->bprice
         ];
     }

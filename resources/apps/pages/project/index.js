@@ -4,6 +4,7 @@ export { default as Employee } from './Employee';
 export { default as Home } from './Home';
 export { default as Item } from './Item';
 export { default as ItemPrice } from './ItemPrice';
+export { default as ItemScan } from './ItemScan';
 export { default as Manager } from './Manager';
 export { default as Marketing } from './Marketing';
 export { default as Monetize } from './Monetize';

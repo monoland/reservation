@@ -1,7 +1,7 @@
 <template>
     <v-page-wrap crud absolute searchable with-progress>
         <template #toolbar-default>
-            <v-btn-tips @click="openLink" label="edit-masif" icon="group_work" :show="!disabled.link" />
+            <v-btn-tips @click="openLink" label="scan-data" icon="g_translate" :show="!disabled.link" />
         </template>
 
         <v-desktop-table v-if="desktop"
@@ -82,7 +82,7 @@ export default {
 
     methods: {
         openLink: function() {
-            // 
+            this.$router.push({ name: 'item-scan', params: { item: this.record.id } });
         },
     }
 };

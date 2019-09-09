@@ -28,6 +28,7 @@ const router = new VueRouter({
             // project
             { path: 'home', name: 'home', component: project.Home },
             { path: 'item', name: 'item', component: project.Item },
+            { path: 'item/:item/scan', name: 'item-scan', component: project.ItemScan },
             { path: 'segmen', name: 'segment', component: project.Segment },
             { path: 'propinsi', name: 'province', component: project.Province },
             { path: 'propinsi/:province/kota-kab', name: 'regency', component: project.Regency },
