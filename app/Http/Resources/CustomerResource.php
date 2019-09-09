@@ -39,8 +39,8 @@ class CustomerResource extends JsonResource
                 'value' => $this->district->id,
             ],
             'label' => [
-                'text' => $this->label->name,
-                'value' => $this->label->id,
+                'text' => optional($this->label)->name,
+                'value' => optional($this->label)->id,
             ],
             'phone' => $this->phone,
             'contact_name' => $this->contact_name,

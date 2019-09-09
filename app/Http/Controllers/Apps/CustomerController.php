@@ -20,11 +20,11 @@ class CustomerController extends Controller
 
         if ($request->user()->isMarketing()) {
             $customers = $request->user()->userable->customers()->with(
-                'segment', 'marketing', 'province', 'regency', 'district'
+                'segment', 'marketing', 'province', 'regency', 'district', 'label'
             )->filterOn($request)->paginate($request->itemsPerPage);
         } else {
             $customers = Customer::with(
-                'segment', 'marketing', 'province', 'regency', 'district'
+                'segment', 'marketing', 'province', 'regency', 'district', 'label'
             )->filterOn($request)->paginate($request->itemsPerPage);
         }
         
