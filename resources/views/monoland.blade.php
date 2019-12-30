@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Monoland">
+    <meta name="apple-mobile-web-app-title" content="Reservasi Online - Citra Alam">
     <meta name="msapplication-TileColor" content="#ffc40d">
     <meta name="theme-color" content="#ffffff">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,7 +17,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
     <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5">
-    <title>Monoland</title>
+    <title>Reservasi Online - Citra Alam</title>
     <link rel="manifest" href="/manifest.json">
     <style>
         [v-cloak] {
