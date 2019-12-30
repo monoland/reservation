@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
@@ -19,13 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->bigInteger('authent_id')->index();
-            $table->string('avatar')->nullable()->default('/images/photo-holder.png');
-            $table->string('background')->nullable()->default('/images/drawer-holder.svg');
+            $table->string('authent')->default('operator');
+            $table->string('avatar')->nullable()->default('/images/user-holder.png');
+            $table->string('background')->nullable()->default('/images/draw-holder.svg');
             $table->string('theme')->default('blue-grey');
             $table->nullableMorphs('userable');
-            $table->boolean('suspended')->default(false);
-            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 <?php
 
-return [
+return array(
+
     /*
     |--------------------------------------------------------------------------
     | Name of route
@@ -15,23 +16,23 @@ return [
     |
     */
 
-    'route' => 'mediafiles',
+    'route' => 'media',
 
     /*
     |--------------------------------------------------------------------------
     | Storage paths
     |--------------------------------------------------------------------------
     |
-    | The following paths will be searched for the image filename, submited
+    | The following paths will be searched for the image filename, submitted
     | by URI.
     |
     | Define as many directories as you like.
     |
     */
 
-    'paths' => [
-        storage_path('uploads')
-    ],
+    'paths' => array(
+        storage_path('app' . DIRECTORY_SEPARATOR . 'public'),
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -49,11 +50,11 @@ return [
     |
     */
 
-    'templates' => [
+    'templates' => array(
         'small' => 'Intervention\Image\Templates\Small',
         'medium' => 'Intervention\Image\Templates\Medium',
         'large' => 'Intervention\Image\Templates\Large',
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,4 +66,5 @@ return [
     */
 
     'lifetime' => 43200,
-];
+
+);

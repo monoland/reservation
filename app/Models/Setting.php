@@ -2,30 +2,15 @@
 
 namespace App\Models;
 
-use App\Traits\HasMetaField;
+use App\Traits\HasMeta;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\SettingResource;
 use Illuminate\Database\Eloquent\Model;
 
-// use Illuminate\Database\Eloquent\SoftDeletes;
-
 class Setting extends Model
 {
-    use HasMetaField;
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = true;
-
-    /**
-     * The "type" of the auto-incrementing ID.
-     *
-     * @var string
-     */
-    protected $keyType = 'string';
+    use HasMeta;
 
     /**
      * The attributes that should be cast to native types.
@@ -33,34 +18,19 @@ class Setting extends Model
      * @var array
      */
     protected $casts = [
-        'meta' => 'json'
+        'meta' => 'array'
     ];
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
+     * Relationship
      */
-    protected $dates = ['deleted_at'];
-
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [];
-
-    // relations
 
     /**
      * Scope for combo
      */
     public function scopeFetchCombo($query)
     {
-        return $query->select(
-            'name AS text',
-            'id AS value'
-        )->get();
+        return $query->select('name AS text', 'id AS value')->get();
     }
 
     /**
@@ -68,41 +38,37 @@ class Setting extends Model
      */
     public function scopeFilterOn($query, $request)
     {
-        $sortaz = $request->sortDesc === 'true' ? 'desc' : 'asc';
-        $sortby = $request->has('sortBy') ? $request->sortBy : null;
-        $filter = $request->has('filter') ? $request->filter : null;
+        $sortBy = strtolower($request->sortBy) ?: null;
+        $sortAz = $request->sortDesc ? 'desc' : 'asc';
+        $findBy = strtolower($request->findBy) ?: null;
+        $findIn = strtolower($request->findIn) ?: null;
 
-        $mixquery = $query;
+        $mquery = $query;
 
-        if ($filter) {
-            $mixquery = $mixquery->where('name', 'like', "%{$filter}%");
+        if ($findBy) {
+            $mquery = $mquery->whereRaw("LOWER({$findIn}) LIKE '%{$findBy}%'");
         }
 
-        if ($sortby) {
-            $mixquery = $mixquery->orderBy($sortby, $sortaz);
+        if ($sortBy) {
+            $mquery = $mquery->orderBy($sortBy, $sortAz);
         }
 
-        return $mixquery;
+        return $mquery;
     }
 
     /**
-     * Store
+     * The store function
+     *
+     * @param Request $request
+     * @return void
      */
-    public static function storeRecord($request)
+    public static function storeRecord(Request $request)
     {
         DB::beginTransaction();
 
         try {
             $model = new static;
-
-            if ($request->id === 'company') {
-                $model->name = $request->meta['name'];
-                $model->slogan = $request->meta['slogan'];
-                $model->avatar = $request->meta['avatar'];
-                $model->height = $request->meta['height'];
-                $model->width = $request->meta['width'];
-            }
-
+            // ...
             $model->save();
 
             DB::commit();
@@ -111,27 +77,26 @@ class Setting extends Model
         } catch (\Exception $e) {
             DB::rollBack();
 
-            abort(500, $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
     /**
-     * Update
+     * The update function
+     *
+     * @param Request $request
+     * @param [type] $model
+     * @return void
      */
-    public static function updateRecord($request, $model)
+    public static function updateRecord(Request $request, $model)
     {
         DB::beginTransaction();
 
         try {
-            if ($model->id === 'company') {
-                $model->name = $request->name;
-                $model->slogan = $request->slogan;
-                $model->avatar = $request->avatar;
-                $model->background = $request->background;
-                $model->height = $request->height;
-                $model->width = $request->width;
-            }
-
+            // ...
             $model->save();
 
             DB::commit();
@@ -140,12 +105,18 @@ class Setting extends Model
         } catch (\Exception $e) {
             DB::rollBack();
 
-            abort(500, $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
     /**
-     * Destroy
+     * The destroy function
+     *
+     * @param [type] $model
+     * @return void
      */
     public static function destroyRecord($model)
     {
@@ -160,28 +131,10 @@ class Setting extends Model
         } catch (\Exception $e) {
             DB::rollBack();
 
-            abort(500, $e->getMessage());
-        }
-    }
-
-    /**
-     * Bulks
-     */
-    public static function bulksRecord($request, $model = null)
-    {
-        DB::beginTransaction();
-
-        try {
-            $bulks = array_column($request->all(), 'id');
-            $rests = (new static)->whereIn('id', $bulks)->delete();
-
-            DB::commit();
-
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            abort(500, $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 }

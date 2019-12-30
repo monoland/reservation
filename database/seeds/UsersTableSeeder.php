@@ -14,13 +14,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'development',
-            'email' => 'dev@citraalam.id',
+        $user = User::create([
+            'name' => 'administrator',
+            'email' => 'admin@monoland.loc',
             'password' => Hash::make('rahasia'),
-            'authent_id' => 1
+            'authent' => 'superadmin'
         ]);
 
-        dd(((new ClientRepository)->createPasswordGrantClient(null, 'development', null))->secret);
+        dd(((new ClientRepository())->createPasswordGrantClient(null, 'monoland-ui', null))->secret);
     }
 }

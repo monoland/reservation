@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Laravel\Passport\HasApiTokens;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Resources\UserResource;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Laravel\Passport\HasApiTokens;
+use App\Http\Resources\AccountResource;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -19,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'authent_id'
+        'name', 'email', 'password',
     ];
 
     /**
@@ -53,99 +55,48 @@ class User extends Authenticatable
     /**
      * Undocumented function
      *
+     * @param [type] $query
      * @return void
      */
-    public function documents()
+    public function scopeFetchCombo($query)
     {
-        return $this->hasMany(Document::class);
+        return $query->select('name AS text', 'id AS value')->get();
     }
 
     /**
      * Undocumented function
      *
+     * @param [type] $query
+     * @param [type] $request
      * @return void
-     */
-    public function authent()
-    {
-        return $this->belongsTo(Authent::class);
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return boolean
-     */
-    public function isAdministrator()
-    {
-        return $this->authent->name === 'administrator';
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return boolean
-     */
-    public function isManager()
-    {
-        return $this->authent->name === 'manager';
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return boolean
-     */
-    public function isMarketing()
-    {
-        return $this->authent->name === 'marketing';
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return boolean
-     */
-    public function isOffice()
-    {
-        return $this->authent->name === 'office';
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return boolean
-     */
-    public function isTrainer()
-    {
-        return $this->authent->name === 'trainer';
-    }
-
-    /**
-     * Scope for filter
      */
     public function scopeFilterOn($query, $request)
     {
-        $sortaz = $request->sortDesc === 'true' ? 'desc' : 'asc';
-        $sortby = $request->has('sortBy') ? $request->sortBy : null;
-        $search = $request->has('search') ? strtolower($request->search) : null;
+        $sortBy = strtolower($request->sortBy) ?: null;
+        $sortAz = $request->sortDesc ? 'desc' : 'asc';
+        $findBy = strtolower($request->findBy) ?: null;
+        $findIn = strtolower($request->findIn) ?: null;
 
-        $mixquery = $query;
+        $mquery = $query;
 
-        if ($search) {
-            $mixquery = $mixquery->whereRaw("LOWER(name) LIKE '%{$search}%'");
+        if ($findBy) {
+            $mquery = $mquery->whereRaw("LOWER({$findIn}) LIKE '%{$findBy}%'");
         }
 
-        if ($sortby) {
-            $mixquery = $mixquery->orderBy($sortby, $sortaz);
+        if ($sortBy) {
+            $mquery = $mquery->orderBy($sortBy, $sortAz);
         }
 
-        return $mixquery;
+        return $mquery;
     }
 
     /**
-     * Store
+     * The store function
+     *
+     * @param Request $request
+     * @return void
      */
-    public static function storeRecord($request)
+    public static function storeRecord(Request $request)
     {
         DB::beginTransaction();
 
@@ -153,93 +104,87 @@ class User extends Authenticatable
             $model = new static;
             $model->name = $request->name;
             $model->email = $request->email;
-            $model->authent_id = $request->authent['value'];
             $model->password = Hash::make('12345678');
-            $model->theme = 'blue-grey';
-            $model->avatar = '/images/photo-holder.png';
-            $model->background = '/images/drawer-holder.svg';
+            $model->authent = 'superadmin';
+            $model->avatar = $request->avatar;
+            $model->background = $request->background;
+            $model->theme = $request->theme;
             $model->save();
 
             DB::commit();
 
-            return new UserResource($model);
+            return new AccountResource($model);
         } catch (\Exception $e) {
             DB::rollBack();
 
-            abort(500, $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
     /**
-     * Update
+     * The update function
+     *
+     * @param Request $request
+     * @param [type] $model
+     * @return void
      */
-    public static function updateRecord($request, $model)
+    public static function updateRecord(Request $request, $model)
     {
         DB::beginTransaction();
 
         try {
-            if ($request->has('name')) {
-                $model->name = $request->name;
-            }
-
-            if ($request->has('email')) {
-                $model->email = $request->email;
-            }
-
-            if ($request->has('avatar')) {
-                $model->avatar = $request->avatar;
-            }
-
-            if ($request->has('background')) {
-                $model->background = $request->background;
-            }
-
-            if ($request->has('authent')) {
-                $model->authent_id = $request->authent['value'];
-            }
-
-            if ($request->has('theme')) {
-                $model->theme = $request->theme;
-            }
-
+            $model->name = $request->name;
+            $model->email = $request->email;
+            $model->avatar = $request->avatar;
+            $model->background = $request->background;
+            $model->theme = $request->theme;
             $model->save();
 
             DB::commit();
 
-            return new UserResource($model);
+            return new AccountResource($model);
         } catch (\Exception $e) {
             DB::rollBack();
 
-            abort(500, $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
-    /**
-     * changePassword
-     */
-    public static function updatePassword($request, $model)
+    public static function updatePassword(Request $request, $model)
     {
         DB::beginTransaction();
 
         try {
             $model->fill([
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
             ])->save();
 
             DB::commit();
 
             return response()->json([
                 'success' => true
-            ]);
+            ], 200);
         } catch (\Exception $e) {
             DB::rollBack();
 
-            abort(500, $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
     /**
-     * Destroy
+     * The destroy function
+     *
+     * @param [type] $model
+     * @return void
      */
     public static function destroyRecord($model)
     {
@@ -254,28 +199,10 @@ class User extends Authenticatable
         } catch (\Exception $e) {
             DB::rollBack();
 
-            abort(500, $e->getMessage());
-        }
-    }
-
-    /**
-     * Bulks
-     */
-    public static function bulkDelete($request, $model = null)
-    {
-        DB::beginTransaction();
-
-        try {
-            $bulks = array_column($request->all(), 'id');
-            $rests = (new static)->whereIn('id', $bulks)->delete();
-
-            DB::commit();
-
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            abort(500, $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 }
